@@ -1,0 +1,40 @@
+---
+order: 2
+title: 365 Project
+subtitle: A photo a day in 2018
+layout: main
+---
+
+
+<section class="resume-section p-3 p-lg-5 d-flex d-column" id="threesixtyfive">
+  <div class="container gallery-container">
+    <div style="text-align: center">
+      <p>As a New Year's resolution, I decided to document my experiences in the year 2018 by taking one picture a day.</p>
+    </div>
+    <div class="tz-gallery">
+      <div class="row">
+        {% assign image_files = site.static_files | where: "threesixtyfive", true %}
+        {% for image in image_files reversed %}
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <a class="lightbox" href="{{ image.path }}">
+              <img width="100%" src="{{ image.path }}" alt="Day {{ forloop.index }}">
+            </a>
+            <div class="caption">
+              {% assign reversed_index = (forloop.length - forloop.index - 1) %}
+              {% assign image_desc = site.data.threesixtyfive[reversed_index] %}
+              <h3>{{ image_desc.title }}</h3>
+              <p>{{ image_desc.description }}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+<script>
+    baguetteBox.run('.tz-gallery');
+</script>
